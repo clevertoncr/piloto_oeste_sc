@@ -1,4 +1,4 @@
-# nodoo-piloto-oeste
+# piloto_oeste_sc
 
 Página estática de validação de hipóteses (fase de discovery).
 
