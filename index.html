@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Nodoo — Validação do modelo com profissionais e locais parceiros</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@700&display=swap');
+
+:root{
+  --jet:#0E1117; --night:#1A1F28; --purple:#6D63FF; --lavender:#8B82FF;
+  --mist:#B8B2FF; --steel:#8B8F99; --silver:#E6E8EC; --white:#FFFFFF;
+  --line:rgba(139,130,255,.22);
+  --line-soft:rgba(230,232,236,.09);
+  --maxw:880px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--jet); color:var(--silver);
+  font:400 16px/1.7 'Inter',Arial,Helvetica,sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+
+/* ---------- primitivos ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:700;font-size:10px;line-height:1.4;letter-spacing:.14em;text-transform:uppercase}
+h1,h2,h3{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;color:var(--white);margin:0}
+h1{font-size:clamp(24px,3.9vw,34px);line-height:1.22;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:clamp(23px,4.4vw,30px);line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+h3{font-size:18px;line-height:1.35;font-weight:500}
+p{margin:0 0 18px}
+p:last-child{margin-bottom:0}
+strong{color:var(--white);font-weight:600}
+em{font-style:normal;color:var(--mist)}
+a{color:var(--lavender)}
+
+/* ---------- topo ---------- */
+header.bar{
+  position:sticky;top:0;z-index:60;background:rgba(14,17,23,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft);
+}
+.bar-in{max-width:var(--maxw);margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.bar img{width:150px;height:auto}
+.bar .mono{color:var(--steel);text-align:right}
+
+/* ---------- hero ---------- */
+.hero{padding:60px 0 8px}
+.eyebrow{color:var(--lavender);margin-bottom:22px}
+.hero h1{margin-bottom:22px;max-width:32ch}
+.lead{font-size:clamp(16.5px,2.3vw,18px);line-height:1.62;color:var(--silver);max-width:62ch}
+.meta{margin-top:30px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  border:1px solid var(--line);border-radius:999px;padding:6px 13px;
+  color:var(--mist);background:rgba(109,99,255,.06)
+}
+
+/* ---------- arquitetura do modelo (strip) ---------- */
+.arch{display:grid;gap:12px;margin-top:36px}
+@media(min-width:760px){.arch{grid-template-columns:repeat(3,1fr)}}
+.arch > div{background:var(--night);border:1px solid var(--line-soft);border-radius:6px;padding:18px 20px}
+.arch .mono{color:var(--purple);margin-bottom:9px}
+.arch b{display:block;font-family:'Space Grotesk',Arial,sans-serif;font-size:15.5px;color:var(--white);margin-bottom:5px}
+.arch span{font-size:13.5px;color:var(--steel);line-height:1.5}
+
+/* ---------- aviso de fase ---------- */
+.notice{
+  margin:44px 0 0;border:1px solid var(--line);border-left:3px solid var(--purple);
+  background:var(--night);border-radius:4px;padding:22px 24px
+}
+.notice .mono{color:var(--lavender);margin-bottom:10px}
+.notice p{font-size:15px;color:var(--silver)}
+
+/* ---------- seções ---------- */
+section{padding:64px 0;border-top:1px solid var(--line-soft)}
+section:first-of-type{border-top:0}
+.num{color:var(--steel);margin-bottom:16px}
+.sec-head{margin-bottom:26px}
+.sec-head h2{margin-bottom:14px}
+.body{max-width:64ch}
+
+/* ---------- cards ---------- */
+.cards{display:grid;gap:14px;margin-top:28px}
+@media(min-width:720px){.cards.c3{grid-template-columns:repeat(3,1fr)}.cards.c2{grid-template-columns:repeat(2,1fr)}}
+.card{
+  background:var(--night);border:1px solid var(--line);border-radius:6px;padding:22px
+}
+.card .mono{color:var(--lavender);margin-bottom:12px}
+.card h3{margin-bottom:8px}
+.card p{font-size:15px;color:var(--steel);margin:0}
+
+/* lista com marcador quadrado */
+ul.sq{list-style:none;padding:0;margin:0}
+ul.sq li{position:relative;padding-left:22px;margin-bottom:12px;font-size:15px;line-height:1.6}
+ul.sq li:last-child{margin-bottom:0}
+ul.sq li::before{
+  content:"";position:absolute;left:0;top:9px;width:7px;height:7px;
+  border:1.5px solid var(--purple);border-radius:1px
+}
+ul.sq li strong{display:block;color:var(--white);font-weight:600;margin-bottom:2px}
+
+/* ---------- ICP ---------- */
+.icp{margin-top:30px;background:var(--night);border:1px solid var(--line);border-radius:6px;padding:24px}
+.icp .mono{color:var(--purple);margin-bottom:12px}
+.icp .who{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:19px;color:var(--white);line-height:1.4;margin-bottom:14px;max-width:44ch}
+.icp p{font-size:14.5px;color:var(--steel)}
+.attrs{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft)}
+
+/* ---------- diagrama de rede ---------- */
+.net{margin-top:30px}
+.net-lbl{color:var(--steel);text-align:center;margin-bottom:12px}
+.net-row{display:grid;gap:12px}
+.net-row.r3{grid-template-columns:repeat(3,1fr)}
+.net-row.r2{grid-template-columns:repeat(2,1fr);max-width:66%;margin:0 auto}
+.node{
+  background:var(--night);border:1px solid var(--line);border-radius:5px;
+  padding:16px 12px;text-align:center
+}
+.node .mono{color:var(--mist);margin-bottom:6px;font-size:9px}
+.node span{display:block;font-size:13px;color:var(--steel);line-height:1.45}
+.hub{
+  background:var(--night);border:1.5px solid var(--purple);border-radius:6px;
+  padding:22px 20px;text-align:center;
+  box-shadow:0 0 0 1px rgba(109,99,255,.12),0 14px 40px -22px rgba(109,99,255,.8)
+}
+.hub .mono{color:var(--purple);margin-bottom:8px}
+.hub strong{display:block;font-family:'Space Grotesk',Arial,sans-serif;font-size:19px;margin-bottom:6px}
+.hub span{font-size:13.5px;color:var(--steel)}
+.band{display:block;width:100%;height:40px}
+.band path{stroke:var(--line);stroke-width:1.5;fill:none}
+.band-m{display:none}
+@media(max-width:719px){
+  .net-row.r3,.net-row.r2{grid-template-columns:1fr;max-width:none}
+  .band-d{display:none}
+  .band-m{display:block;height:26px}
+}
+
+/* ---------- duas colunas genéricas ---------- */
+.split{display:grid;gap:14px;margin-top:28px;align-items:start}
+@media(min-width:760px){.split{grid-template-columns:1fr 1fr}}
+.col{border:1px solid var(--line-soft);border-radius:6px;background:var(--night);padding:24px}
+.col.open{border-color:var(--line)}
+.col > .mono{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.col.fixed > .mono{color:var(--silver)}
+.col.open > .mono{color:var(--lavender)}
+.col ul.sq li::before{border-color:var(--steel)}
+.col.open ul.sq li::before{border-color:var(--purple)}
+.col .foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line-soft);font-size:13px;color:var(--steel);line-height:1.55}
+.col h3.opp-t{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:18px;margin-bottom:10px;line-height:1.3}
+.col p.opp-p{font-size:14.5px;color:var(--steel);margin-bottom:16px}
+
+/* ---------- cluster ---------- */
+.cluster{margin-top:28px;border:1px solid var(--line);border-radius:6px;background:var(--night);padding:28px 24px}
+.cluster > .mono{color:var(--purple);margin-bottom:20px}
+.cities{display:flex;align-items:center;gap:0;flex-wrap:nowrap}
+.city{flex:1;text-align:center}
+.city strong{display:block;font-family:'Space Grotesk',Arial,sans-serif;font-size:17px;color:var(--white);margin-bottom:4px}
+.city span{font-size:12.5px;color:var(--steel);line-height:1.45;display:block}
+.link{flex:0 0 auto;width:clamp(50px,16%,110px);display:flex;flex-direction:column;align-items:center;gap:6px}
+.link .ln{width:100%;height:1.5px;background:linear-gradient(90deg,var(--purple),var(--lavender))}
+.link .mono{color:var(--steel);font-size:8.5px;margin:0;text-align:center;line-height:1.3;letter-spacing:.06em}
+.cluster p{margin-top:22px;font-size:14.5px;color:var(--steel)}
+
+/* ---------- timeline ---------- */
+.tl{display:grid;gap:12px;margin-top:28px}
+@media(min-width:720px){.tl{grid-template-columns:repeat(3,1fr)}}
+.step{border:1px solid var(--line-soft);border-top:2px solid var(--line-soft);border-radius:4px;padding:20px;background:rgba(26,31,40,.5)}
+.step.now{border-color:var(--line);border-top-color:var(--purple);background:var(--night)}
+.step .mono{color:var(--steel);margin-bottom:10px}
+.step.now .mono{color:var(--purple)}
+.step h3{font-size:16px;margin-bottom:6px}
+.step p{font-size:13.5px;color:var(--steel);margin:0}
+
+/* ---------- botões de público (compartilhado) ---------- */
+.pubtabs{display:grid;gap:8px;margin-top:26px}
+@media(min-width:640px){.pubtabs{grid-template-columns:repeat(4,1fr)}}
+.ptab{
+  appearance:none;cursor:pointer;background:transparent;color:var(--steel);
+  border:1px solid var(--line-soft);border-radius:6px;padding:16px 14px;
+  display:flex;align-items:center;gap:10px;text-align:left;
+  font-family:'Inter',Arial,sans-serif;font-weight:500;font-size:14px;
+  line-height:1.25;transition:.15s
+}
+.ptab svg{flex:0 0 auto;width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.ptab:hover{color:var(--silver);border-color:var(--line)}
+.ptab:focus-visible{outline:2px solid var(--lavender);outline-offset:2px}
+.ptab[aria-selected="true"]{background:var(--purple);border-color:var(--purple);color:var(--white)}
+.ptab[aria-selected="true"] svg{opacity:1}
+
+/* ---------- painel de proposta de valor ---------- */
+.vpanel{margin-top:14px;background:var(--night);border:1px solid var(--line);border-radius:8px;padding:30px 28px}
+.vpanel[hidden]{display:none}
+.vgrid{display:grid;gap:26px}
+@media(min-width:820px){.vgrid{grid-template-columns:1.55fr 1fr 1fr;gap:0}}
+.vmain > .mono{color:var(--purple);margin-bottom:12px}
+.vmain h3{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:clamp(20px,2.8vw,25px);line-height:1.22;margin-bottom:14px;max-width:22ch}
+.vmain p{font-size:15px;color:var(--steel);margin:0}
+.prova{margin-top:24px;padding-top:20px;border-top:1px solid var(--line-soft);display:flex;gap:12px}
+.prova svg{flex:0 0 auto;width:17px;height:17px;margin-top:2px;stroke:var(--purple);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.prova b{display:block;font-size:14.5px;color:var(--white);font-weight:600;margin-bottom:3px}
+.prova span{font-size:13.5px;color:var(--steel);line-height:1.55}
+@media(min-width:820px){
+  .vmain{padding-right:30px}
+  .vcol{padding-left:26px;border-left:1px solid var(--line-soft)}
+}
+@media(max-width:819px){
+  .vcol{padding-top:20px;border-top:1px solid var(--line-soft)}
+}
+.vcol > .mono{color:var(--lavender);margin-bottom:16px}
+.vcol ul{list-style:none;padding:0;margin:0}
+.vcol li{font-size:14px;color:var(--silver);line-height:1.5;padding-bottom:11px;border-bottom:1px solid var(--line-soft);margin-bottom:13px}
+.vcol li:last-child{margin-bottom:0}
+
+/* ---------- seletor de formulários ---------- */
+#voce{scroll-margin-top:64px}
+.tabs-sticky{position:sticky;top:53px;z-index:50;background:rgba(14,17,23,.94);backdrop-filter:blur(12px);margin:0 -24px;padding:12px 24px;border-bottom:1px solid var(--line-soft)}
+.tabs-sticky .pubtabs{margin:0;max-width:var(--maxw);margin-left:auto;margin-right:auto}
+.tabs-sticky .ptab{padding:12px 10px;font-size:13px}
+.panel[hidden]{display:none}
+.panel{padding-top:52px}
+.panel-tag{color:var(--lavender);margin-bottom:14px}
+.hyp{
+  margin:26px 0;padding:20px 22px;background:var(--night);
+  border:1px solid var(--line);border-left:3px solid var(--purple);border-radius:4px
+}
+.hyp .mono{color:var(--purple);margin-bottom:10px}
+.hyp p{font-size:15.5px;color:var(--white);margin:0;line-height:1.6}
+
+.block{margin-top:38px}
+.block > h3{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:19px;margin-bottom:16px}
+
+.notlist li::before{border-color:var(--steel)!important;background:transparent}
+.notlist li{color:var(--steel)}
+
+/* ---------- formulário ---------- */
+.form{margin-top:44px;border:1px solid var(--line);border-radius:6px;background:var(--night);padding:26px 22px}
+.form > .mono{color:var(--purple);margin-bottom:12px}
+.form > h3{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:21px;margin-bottom:8px}
+.form > p.intro{font-size:14.5px;color:var(--steel);margin-bottom:26px}
+.q{margin-bottom:22px}
+.q label{display:block;font-size:14.5px;line-height:1.55;color:var(--silver);margin-bottom:9px}
+.q label b{color:var(--purple);font-family:'JetBrains Mono',monospace;font-size:11px;margin-right:7px;font-weight:700}
+.q textarea,.q input{
+  width:100%;background:var(--jet);color:var(--white);
+  border:1px solid var(--line-soft);border-radius:4px;padding:11px 13px;
+  font:400 15px/1.55 'Inter',Arial,sans-serif;resize:vertical
+}
+.q textarea{min-height:74px}
+.q textarea:focus,.q input:focus{outline:none;border-color:var(--purple)}
+.q textarea::placeholder,.q input::placeholder{color:#565b66}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line-soft)}
+.btn{
+  appearance:none;cursor:pointer;border-radius:5px;padding:14px 22px;
+  font-family:'Inter',Arial,sans-serif;font-weight:600;font-size:14.5px;
+  border:1px solid var(--line);background:transparent;color:var(--silver);transition:.15s;flex:1 1 auto;min-width:170px
+}
+.btn:hover{border-color:var(--lavender);color:var(--white)}
+.btn:focus-visible{outline:2px solid var(--lavender);outline-offset:2px}
+.btn.primary{background:linear-gradient(90deg,var(--purple),var(--lavender));border-color:transparent;color:var(--white)}
+.btn.primary:hover{filter:brightness(1.1)}
+.hint{margin-top:14px;font-size:12.5px;color:var(--steel);line-height:1.55}
+.saved{font-size:12px;color:var(--purple);margin-top:12px;min-height:16px;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- assinatura ---------- */
+.sign{margin-top:64px;border-top:1px solid var(--line-soft);padding-top:44px}
+.sign .mono{color:var(--steel);margin-bottom:18px}
+.sign p{font-size:16.5px;line-height:1.7;color:var(--silver);max-width:58ch}
+.sign .name{margin-top:26px;font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:17px;color:var(--white)}
+.sign .role{font-size:13.5px;color:var(--steel);margin-top:2px}
+
+footer{border-top:1px solid var(--line-soft);margin-top:56px;padding:30px 0 60px}
+footer .mono{color:#4c5159;line-height:1.9}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-in">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABkAAAAImCAIAAACEjNGkAAAABmJLR0QA/wD/AP+gvaeTAAAgAElEQVR4nOzdd2AUZcLH8ZnZ3fSEVFIIJfROSEWqBZRi74ronVhQ3rN7d95Z7/Tu1NNTz654ig1FUUFsSBFEIRVCJ/SWSnrfMu8fAUREyczOZJ/d/X7+VPaZZ588uzPPb58iR0TFSwAAAAAAAICoFE9XAAAAAAAAAPgtBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhEaABQAAAAAAAKERYAEAAAAAAEBoBFgAAAAAAAAQGgEWAAAAAAAAhGb1dAUA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ABA1AQsAAACAqAlYAAAAAERNwAIAAAAgagIWAAAAAFETsAAAAACImoAFAAAAQNQELAAAAACiJmABAAAAEDUBCwAAAICoCVgAAAAARE3AAgAAACBqAhYAAAAAUROwAAAAAIiagAUAAABA1AQsAAAAAKImYAEAAAAQNQELAAAAgKgJWAAAAABETcACAAAAIGoCFgAAAABRE7AAAAAAiJqABQAAAEDUBCwAAAAAoiZgAQAAABA1AQsAAACAqAlYAAAAAERNwAIAAAAgagIWAAAAAFETsAAAAACImoAFAAAAQNQELAAAAACiJmABAAAAEDUBCwAAAICoCVgAAAAARE3AAgAAACBqAhYAAAAAUROwAAAAAIiagAUAAABA1AQsAAAAAKImYAEAAAAQNQELAAAAgKgJWAAAAABETcACAAAAIGoCFgAAAABRE7AAAAAAiJqABQAAAEDUBCwAAAAAoiZgAQAAABA1AQsAAACAqAlYAAAAAERNwAIAAAAgagIWAAAAAFETsAAAAACImoAFAAAAQNQELAAAAACiJmABAAAAEDUBCwAAAICoCVgAAAAARE3AAgAAACBqAhYAAAAAUROwAAAAAIiagAUAAABA1AQsAAAAAKImYAEAAAAQNQELAAAAgKgJWAAAAABETcACAAAAIGoCFgAAAABRE7AAAAAAiJqABQAAAEDUBCwAAAAAoiZgAQAAABA1AQsAAACAqAlYAAAAAERNwAIAAAAgagIWAAAAAFETsAAAAACImoAFAAAAQNQELAAAAACiJmABAAAAEDUBCwAAAICoCVgAAAAARE3AAgAAACBq/x99qjeYnh1LkAAAAABJRU5ErkJggg==" alt="Nodoo">
+    <div class="mono">Documento de discovery<br>Conteúdo em validação</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="mono eyebrow">Piloto do primeiro cluster · Oeste de SC</div>
+    <h1>Um modelo asset-backed para levar eletroestimulação supervisionada para condomínios, com personal trainer como sócio-operador local.</h1>
+    <p class="lead">A empresa concentra equipamento, marca, playbook e a negociação com os condomínios. O operador local opera e cresce o cluster, com participação econômica no resultado — sem comprar máquina e sem montar studio.</p>
+    <div class="meta">
+      <span class="chip mono">Leitura: ~8 min</span>
+      <span class="chip mono">Fase: Discovery</span>
+      <span class="chip mono">Tem formulário no fim</span>
+    </div>
+
+    <div class="arch">
+      <div>
+        <div class="mono">Empresa</div>
+        <b>Concentra o ativo</b>
+        <span>CAPEX, equipamento, marca, protocolos, dados, treinamento e a negociação condominial.</span>
+      </div>
+      <div>
+        <div class="mono">Sócio-operador local</div>
+        <b>Opera e cresce</b>
+        <span>Personal trainer atende, cuida da agenda e abre novos locais, com participação no resultado.</span>
+      </div>
+      <div>
+        <div class="mono">Morador</div>
+        <b>Usa onde já mora</b>
+        <span>Sessão curta, supervisionada e agendada dentro do próprio condomínio ou muito perto dele.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <div class="mono">Antes de começar</div>
+    <p>O objetivo desta página é <strong>validar a ideia com quem já conhece o terreno</strong>: profissionais que já trabalham com eletroestimulação e donos de clínicas e studios que podem ser parceiros da rede. Você está lendo porque tem experiência prática que eu não tenho — e é essa leitura que eu preciso antes de decidir qualquer coisa.</p>
+    <p>Não tem preço nem contrato aqui: o modelo comercial ainda está sendo desenhado, e as perguntas no fim da página são o começo desse desenho.</p>
+  </div>
+
+  <!-- ============ 01 DOR DO CLIENTE ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">01 — A dor do cliente</div>
+      <h2>O usuário não compra EMS. Compra aderência e conveniência.</h2>
+    </div>
+    <div class="body">
+      <p>Quem procura eletroestimulação raramente está comprando a tecnologia. Está comprando a chance de finalmente manter uma rotina. E o que quebra a rotina quase nunca é o preço: <strong>é o deslocamento e a fricção de agenda.</strong></p>
+      <p>Um treino que exige sair de casa, enfrentar trânsito, estacionar e voltar compete por mais um compromisso na semana — e perde. O produto precisa <strong>aparecer dentro da rotina do morador</strong>, não disputar espaço fora dela.</p>
+      <p>É daí que vem a escolha do condomínio como ponto de partida: é o lugar onde a distância entre a intenção e a sessão é a menor possível. A pessoa desce de elevador.</p>
+    </div>
+
+    <div class="icp">
+      <div class="mono">Cliente típico — nosso ICP</div>
+      <div class="who">Profissional ocupado, 35–60 anos, com baixa aderência à academia e disposição para pagar por personalização.</div>
+      <p>Não é o público que treina cinco vezes por semana e adora academia. É quem já tentou, não conseguiu manter, e valoriza tempo e acompanhamento mais do que variedade de equipamento.</p>
+      <div class="attrs">
+        <span class="chip mono">Pouco tempo</span>
+        <span class="chip mono">Treino de ~20 min</span>
+        <span class="chip mono">No condomínio</span>
+        <span class="chip mono">Supervisão 1:1</span>
+        <span class="chip mono">Assinatura</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 A OPORTUNIDADE ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">02 — A oportunidade</div>
+      <h2>São duas oportunidades, não uma.</h2>
+      <p class="body" style="margin-top:14px">A primeira está no condomínio, do lado da distribuição. A segunda está nas clínicas, studios e academias, do lado da capacidade. Elas se sustentam mutuamente.</p>
+    </div>
+
+    <div class="split">
+      <div class="col open">
+        <div class="mono">Oportunidade 01 · Condomínio</div>
+        <h3 class="opp-t">Transformar a academia condominial em canal de distribuição</h3>
+        <p class="opp-p">O diferencial não é ter uma máquina de EMS. É ter o playbook para entrar, vender e operar dentro de condomínios.</p>
+        <ul class="sq">
+          <li><strong>Corta os dois maiores custos de um studio</strong>Aluguel comercial e aquisição de cliente caem ao mesmo tempo quando a operação acontece onde o cliente já mora.</li>
+          <li><strong>Público concentrado num só endereço</strong>Dezenas de famílias, faixas etárias e objetivos diferentes no mesmo prédio.</li>
+          <li><strong>Espaço onde o studio tradicional não entra</strong>Condomínio não é praça de aluguel comercial — é amenity. A conta é outra.</li>
+        </ul>
+      </div>
+
+      <div class="col open">
+        <div class="mono">Oportunidade 02 · Clínicas, studios e academias</div>
+        <h3 class="opp-t">Serviço novo para a base de clientes, em hora que hoje não gera nada</h3>
+        <p class="opp-p">Quem já tem estrutura montada tem dois problemas parecidos: horário ocioso e dificuldade de se diferenciar.</p>
+        <ul class="sq">
+          <li><strong>Otimizar as horas de uso da estrutura</strong>As faixas em que a sala fica vazia passam a ter agenda, sem obra e sem novo aluguel.</li>
+          <li><strong>Oferecer algo novo sem comprar equipamento</strong>Eletroestimulação supervisionada entra no portfólio como serviço, não como investimento em ativo.</li>
+          <li><strong>Diferenciação diante da própria base</strong>O cliente que já frequenta passa a ter acesso a uma modalidade que ele teria que buscar em outro lugar.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 A IDEIA ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">03 — A ideia</div>
+      <h2>E se o equipamento não pertencesse a um endereço?</h2>
+    </div>
+    <div class="body">
+      <p>A resposta que vamos testar: em vez de imobilizar um aparelho por prédio, a Nodoo é dona do equipamento e do playbook de operação, e <strong>o mesmo equipamento é compartilhado entre vários condomínios e vários parceiros</strong> — não um por vez, mas todos dentro da mesma semana. Um condomínio na segunda de manhã, uma clínica na terça à tarde, um studio na quinta à noite.</p>
+      <p>Quem usa não aluga a máquina: contrata uma <strong>sessão acompanhada por um profissional habilitado</strong>.</p>
+    </div>
+    <div class="cards c2">
+      <div class="card">
+        <div class="mono">Para quem usa</div>
+        <h3>O equipamento e o profissional vão até você</h3>
+        <p>Sessão acompanhada onde você já mora ou muito perto disso, sem deslocamento e sem perder uma hora do dia só pra chegar lá.</p>
+      </div>
+      <div class="card">
+        <div class="mono">Para o condomínio e o studio parceiro</div>
+        <h3>Tem EMS na casa sem comprar EMS</h3>
+        <p>O condomínio, a clínica ou o studio não investe em equipamento, não imobiliza capital e não assume manutenção.</p>
+      </div>
+      <div class="card">
+        <div class="mono">Para o profissional</div>
+        <h3>Equipamento premium sem CAPEX</h3>
+        <p>Acesso ao aparelho, aos locais e à demanda sem precisar montar um studio próprio.</p>
+      </div>
+      <div class="card">
+        <div class="mono">Como o dia se preenche</div>
+        <h3>Cada faixa de horário tem o seu público</h3>
+        <p>Início da manhã e início da noite são o pico — e é onde está o ICP padrão, o profissional ocupado. O meio da manhã e o meio da tarde, que num studio comum ficam vazios, abrem para público idoso, pacientes em reabilitação e quem tem horário flexível.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 COMO A REDE SE ORGANIZA ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">04 — Como a rede se organiza</div>
+      <h2>Locais entram como capacidade. A Nodoo entra como operação.</h2>
+    </div>
+    <div class="body">
+      <p>Nenhum local precisa ser exclusivo, e nenhum local precisa ser dedicado. A rede usa espaço que já existe, em horário que hoje não gera nada.</p>
+    </div>
+
+    <div class="net">
+      <div class="mono net-lbl">Onde acontece · capacidade física</div>
+      <div class="net-row r3">
+        <div class="node"><div class="mono">Local</div><span>Condomínio</span></div>
+        <div class="node"><div class="mono">Local</div><span>Clínica de fisioterapia</span></div>
+        <div class="node"><div class="mono">Local</div><span>Studio · academia</span></div>
+      </div>
+      <svg class="band band-d" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M50 4 V20 M150 4 V20 M250 4 V20 M50 20 H250 M150 20 V38"/></svg>
+      <svg class="band band-m" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M150 2 V24"/></svg>
+
+      <div class="hub">
+        <div class="mono">O nó da rede</div>
+        <strong>Nodoo</strong>
+        <span>Dona do equipamento · playbook de operação · agenda · captação · marca</span>
+      </div>
+
+      <svg class="band band-d" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M150 2 V20 M100 20 H200 M100 20 V38 M200 20 V38"/></svg>
+      <svg class="band band-m" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M150 2 V24"/></svg>
+
+      <div class="net-row r2">
+        <div class="node"><div class="mono">Quem entrega</div><span>Profissional habilitado</span></div>
+        <div class="node"><div class="mono">Quem usa</div><span>Usuário final</span></div>
+      </div>
+      <div class="mono net-lbl" style="margin-top:14px">Quem faz e quem usa</div>
+    </div>
+  </section>
+
+  <!-- ============ 05 POR QUE EMS PRIMEIRO ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">05 — Por que EMS primeiro</div>
+      <h2>EMS é o ponto de entrada, não o negócio.</h2>
+    </div>
+    <div class="body">
+      <p>O EMS foi escolhido pra começar por três razões práticas: a sessão é curta — o que ajuda a girar agenda —, o equipamento é transportável — o que torna a circulação entre locais possível — e a faixa de aplicação é larga.</p>
+      <p>As aplicações em avaliação vão de performance e condicionamento a fisioterapia, reabilitação, público idoso e estética. <strong>Cada uma delas é uma hipótese separada</strong>, com implicação própria de posicionamento e de responsabilidade técnica.</p>
+      <p>A visão de longo prazo não é ser uma rede de EMS. É ser uma rede que compartilha equipamento e experiência de saúde e performance — o EMS é o primeiro item do catálogo.</p>
+    </div>
+  </section>
+
+  <!-- ============ 06 QUEM GANHA O QUÊ ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">06 — Quem ganha o quê</div>
+      <h2>Quatro perspectivas da mesma rede</h2>
+      <p class="body" style="margin-top:14px">Selecione um público para ver a proposta de valor e o que precisa ser testado.</p>
+    </div>
+
+    <div class="pubtabs" role="tablist" data-group="valor">
+      <button class="ptab" role="tab" data-view="morador" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20c0-3.6 2.9-6.1 6.5-6.1s6.5 2.5 6.5 6.1"/></svg>
+        Morador
+      </button>
+      <button class="ptab" role="tab" data-view="condominio" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V6.5L12 3l8 3.5V20"/><path d="M4 20h16"/><path d="M9.5 20v-4.5h5V20"/><path d="M8.5 10h1.5M14 10h1.5"/></svg>
+        Condomínio
+      </button>
+      <button class="ptab" role="tab" data-view="clinica" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v5.5a4 4 0 0 0 8 0V3"/><path d="M10 12.5V16a4 4 0 0 0 8 0v-1.6"/><circle cx="18" cy="12.4" r="2"/></svg>
+        Clínica / academia
+      </button>
+      <button class="ptab" role="tab" data-view="operador" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8.4 6h7.2M7.2 8.1 10.8 16M16.8 8.1 13.2 16"/></svg>
+        Sócio-operador
+      </button>
+    </div>
+
+    <div class="vpanel" id="v-morador" hidden>
+      <div class="vgrid">
+        <div class="vmain">
+          <div class="mono">Proposta de valor</div>
+          <h3>Conveniência para criar aderência</h3>
+          <p>Sessões curtas, supervisionadas e agendadas dentro do condomínio reduzem o deslocamento e encaixam o treino na rotina.</p>
+          <div class="prova">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M5 21v-6M19 21v-6M5 15h14"/><circle cx="12" cy="9" r="2"/></svg>
+            <div>
+              <b>O que o piloto precisa provar</b>
+              <span>Conversão de demonstração para plano pago e permanência depois do primeiro mês.</span>
+            </div>
+          </div>
+        </div>
+        <div class="vcol">
+          <div class="mono">Contribui com</div>
+          <ul><li>tempo e recorrência</li><li>pagamento direto</li><li>feedback da experiência</li></ul>
+        </div>
+        <div class="vcol">
+          <div class="mono">Recebe</div>
+          <ul><li>acesso próximo</li><li>supervisão profissional</li><li>agenda simples</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="vpanel" id="v-condominio" hidden>
+      <div class="vgrid">
+        <div class="vmain">
+          <div class="mono">Proposta de valor</div>
+          <h3>Amenity premium sem operar nada</h3>
+          <p>Um serviço de saúde e performance dentro do prédio, sem investimento do condomínio, sem contratar profissional e sem administrar agenda ou cobrança.</p>
+          <div class="prova">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M5 21v-6M19 21v-6M5 15h14"/><circle cx="12" cy="9" r="2"/></svg>
+            <div>
+              <b>O que o piloto precisa provar</b>
+              <span>Aprovação com fricção baixa e convivência sem atrito no uso da área comum.</span>
+            </div>
+          </div>
+        </div>
+        <div class="vcol">
+          <div class="mono">Contribui com</div>
+          <ul><li>espaço subutilizado</li><li>autorização de área comum</li><li>canal com os moradores</li></ul>
+        </div>
+        <div class="vcol">
+          <div class="mono">Recebe</div>
+          <ul><li>amenity diferenciado</li><li>operação por conta da Nodoo</li><li>zero investimento</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="vpanel" id="v-clinica" hidden>
+      <div class="vgrid">
+        <div class="vmain">
+          <div class="mono">Proposta de valor</div>
+          <h3>Serviço novo e hora ociosa monetizada</h3>
+          <p>A estrutura que já existe passa a oferecer eletroestimulação supervisionada para a própria base de clientes, nas faixas de horário em que hoje não gera receita.</p>
+          <div class="prova">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M5 21v-6M19 21v-6M5 15h14"/><circle cx="12" cy="9" r="2"/></svg>
+            <div>
+              <b>O que o piloto precisa provar</b>
+              <span>Se o horário ocioso vira agenda cheia de verdade, e qual arranjo de receita funciona para o local.</span>
+            </div>
+          </div>
+        </div>
+        <div class="vcol">
+          <div class="mono">Contribui com</div>
+          <ul><li>capacidade física em hora vaga</li><li>base de clientes</li><li>leitura do público local</li></ul>
+        </div>
+        <div class="vcol">
+          <div class="mono">Recebe</div>
+          <ul><li>serviço novo sem comprar ativo</li><li>ocupação de horário morto</li><li>profissional habilitado</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="vpanel" id="v-operador" hidden>
+      <div class="vgrid">
+        <div class="vmain">
+          <div class="mono">Proposta de valor</div>
+          <h3>Escala sem comprar máquina</h3>
+          <p>O personal trainer opera a rede na cidade com equipamento, marca e playbook da empresa, com participação econômica no resultado do cluster.</p>
+          <div class="prova">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M5 21v-6M19 21v-6M5 15h14"/><circle cx="12" cy="9" r="2"/></svg>
+            <div>
+              <b>O que o piloto precisa provar</b>
+              <span>Se um operador sustenta a agenda em vários locais, e qual arranjo econômico é justo para as duas partes.</span>
+            </div>
+          </div>
+        </div>
+        <div class="vcol">
+          <div class="mono">Contribui com</div>
+          <ul><li>domínio técnico e atendimento</li><li>presença e reputação local</li><li>relação com os locais</li></ul>
+        </div>
+        <div class="vcol">
+          <div class="mono">Recebe</div>
+          <ul><li>equipamento sem CAPEX</li><li>marca e playbook</li><li>participação no resultado</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 O RECORTE DO PILOTO ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">07 — O recorte do piloto</div>
+      <h2>Pra testar as duas perguntas, o piloto precisa de uma malha.</h2>
+    </div>
+    <div class="body">
+      <p>Um único endereço não responde a segunda pergunta — as horas vagas continuam vagas. Então o piloto precisa de mais de um local e mais de um público na mesma região. Essa combinação de <strong>equipamentos + locais + profissionais + usuários</strong> a distância de deslocamento é o que chamamos internamente de <strong>cluster</strong>.</p>
+      <p>O recorte escolhido pro primeiro piloto é o Oeste de Santa Catarina, com Chapecó e Maravilha na mesma malha e o equipamento circulando entre elas.</p>
+    </div>
+
+    <div class="cluster">
+      <div class="mono">Recorte do piloto · Oeste de SC</div>
+      <div class="cities">
+        <div class="city"><strong>Chapecó</strong><span>Densidade de condomínios, academias e demanda</span></div>
+        <div class="link"><div class="ln"></div><div class="mono">~70 km</div></div>
+        <div class="city"><strong>Maravilha</strong><span>Base clínica e público de reabilitação</span></div>
+      </div>
+      <p>Se o mesmo ativo consegue atravessar duas cidades e manter agenda cheia, a hipótese se sustenta e aí sim vale desenhar como isso cresce. Se não consegue — se a logística come a margem ou a agenda não fecha — é muito melhor descobrir agora, com um equipamento, do que depois, com dez.</p>
+    </div>
+
+    <div class="notice" style="margin-top:26px">
+      <div class="mono">Escopo — leia com atenção</div>
+      <p>Isto é uma <strong>decisão de piloto</strong>, não a estratégia de expansão da Nodoo. Escolher Chapecó e Maravilha não define região prioritária da empresa, não cria exclusividade de território, não fecha o formato de crescimento e não antecipa como novos clusters serão montados. Tudo isso depende do que o piloto mostrar — e só será discutido depois dele.</p>
+    </div>
+  </section>
+
+  <!-- ============ 08 RÉGUA DE HONESTIDADE ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">08 — Régua de honestidade</div>
+      <h2>O que já está decidido e o que ainda não está.</h2>
+      <p class="body" style="margin-top:14px">Essa separação é a coisa mais importante da página. Tudo da coluna da direita é assunto de conversa, não de apresentação. E tudo na coluna da esquerda vale <strong>para o piloto</strong> — não é o modelo definitivo da empresa.</p>
+    </div>
+
+    <div class="split">
+      <div class="col fixed">
+        <div class="mono">Decidido para o piloto</div>
+        <ul class="sq">
+          <li><strong>O ponto de partida é o condomínio</strong>É onde a fricção de acesso é menor e o público está concentrado.</li>
+          <li><strong>A Nodoo é dona do equipamento</strong>Nenhum parceiro compra, financia ou imobiliza capital em aparelho.</li>
+          <li><strong>Não se aluga a máquina para o usuário</strong>O que se contrata é sessão acompanhada por profissional habilitado. Sempre.</li>
+          <li><strong>O piloto opera em malha, não em endereço</strong>Um equipamento servindo vários locais e horários, pra testar se as horas vagas enchem.</li>
+          <li><strong>O recorte é o Oeste de SC</strong>Chapecó e Maravilha como uma malha só — escolha de piloto, não região definitiva da empresa.</li>
+          <li><strong>Discovery antes de escala</strong>Primeiro provar um cluster. Só depois discutir qualquer expansão.</li>
+        </ul>
+        <div class="foot">Decidido significa "é a escolha de desenho deste piloto" — não significa "está validado", nem "é assim que a empresa vai operar depois". A validação é o piloto.</div>
+      </div>
+
+      <div class="col open">
+        <div class="mono">Em aberto — quero decidir junto com você</div>
+        <ul class="sq">
+          <li><strong>Preço da sessão e modelo de cobrança</strong>Não existe tabela. Nem pra usuário, nem pra parceiro.</li>
+          <li><strong>Divisão de receita</strong>Entre Nodoo, condomínio, operador, profissional e o local parceiro — clínica, studio ou academia. Nada definido.</li>
+          <li><strong>Formato jurídico da relação</strong>Prestação de serviço, divisão de receita, sociedade, participação por metas — tudo em aberto.</li>
+          <li><strong>Quem opera em cada local</strong>Se o parceiro é treinado para operar, ou se um profissional da rede atende lá.</li>
+          <li><strong>Quais locais entram e em que ordem</strong>Depende de quem topar e de onde a agenda fechar.</li>
+          <li><strong>Equipamento e fornecedor definitivos</strong>Em comparação de mercado.</li>
+          <li><strong>Enquadramento regulatório por aplicação e por local</strong>Em pesquisa.</li>
+          <li><strong>Como a rede cresce depois do piloto</strong>Unidades próprias, operadores locais, licenciamento, franquia — nenhuma dessas arquiteturas foi escolhida.</li>
+          <li><strong>Nome e marca</strong>"Nodoo" é a direção atual, ainda em validação.</li>
+        </ul>
+        <div class="foot">Se alguém te apresentar qualquer um desses itens como fechado, está inventando.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 O QUE O PILOTO TEM QUE PROVAR ============ -->
+  <section>
+    <div class="sec-head">
+      <div class="mono num">09 — O que o piloto tem que provar</div>
+      <h2>Seis perguntas que decidem se isso continua.</h2>
+    </div>
+    <div class="body">
+      <ul class="sq">
+        <li><strong>Proximidade vira uso</strong>Tendo o serviço dentro do prédio — ou muito perto do local de moradia — as pessoas realmente usam? E voltam?</li>
+        <li><strong>Capacidade emprestada</strong>Os locais topam ceder horário ocioso na prática, e não só na conversa? E eles preferem operar o equipamento sendo treinados, ou preferem que um profissional da rede atenda ali? Qual seria o modelo de receita em cada um dos dois casos?</li>
+        <li><strong>Ocupação ao longo do dia</strong>Dá pra encher os horários vagos com públicos diferentes?</li>
+        <li><strong>Arranjo comercial</strong>Existe uma divisão que local, profissional, operador e Nodoo aceitem ao mesmo tempo?</li>
+        <li><strong>A conta</strong>Fecha por equipamento e por cluster, num nível de utilização alcançável?</li>
+        <li><strong>Regulatório</strong>O que queremos fazer é permitido, em cada tipo de local e de aplicação?</li>
+      </ul>
+    </div>
+
+    <div class="tl">
+      <div class="step now">
+        <div class="mono">Agora</div>
+        <h3>Discovery</h3>
+        <p>Conversas como esta. Testar as hipóteses antes de comprar qualquer coisa.</p>
+      </div>
+      <div class="step">
+        <div class="mono">Em seguida</div>
+        <h3>Piloto do cluster</h3>
+        <p>Um equipamento, poucos locais, um operador. Medindo tudo.</p>
+      </div>
+      <div class="step">
+        <div class="mono">Depois</div>
+        <h3>Decisão</h3>
+        <p>Escalar, mudar o desenho ou parar. As três saídas são reais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 ONDE VOCÊ ENTRA ============ -->
+  <section id="voce">
+    <div class="sec-head">
+      <div class="mono num">10 — Onde você entra</div>
+      <h2>Escolha o papel que é o seu.</h2>
+      <p class="body" style="margin-top:14px">Cada papel tem uma hipótese diferente por trás e um conjunto diferente de perguntas. Você pode ler os quatro — não tem versão secreta.</p>
+    </div>
+  </section>
+
+  <div class="tabs-sticky">
+    <div class="pubtabs" role="tablist" data-group="form">
+      <button class="ptab" role="tab" data-view="morador" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20c0-3.6 2.9-6.1 6.5-6.1s6.5 2.5 6.5 6.1"/></svg>
+        Morador
+      </button>
+      <button class="ptab" role="tab" data-view="condominio" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V6.5L12 3l8 3.5V20"/><path d="M4 20h16"/><path d="M9.5 20v-4.5h5V20"/><path d="M8.5 10h1.5M14 10h1.5"/></svg>
+        Condomínio
+      </button>
+      <button class="ptab" role="tab" data-view="clinica" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v5.5a4 4 0 0 0 8 0V3"/><path d="M10 12.5V16a4 4 0 0 0 8 0v-1.6"/><circle cx="18" cy="12.4" r="2"/></svg>
+        Clínica / academia
+      </button>
+      <button class="ptab" role="tab" data-view="operador" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8.4 6h7.2M7.2 8.1 10.8 16M16.8 8.1 13.2 16"/></svg>
+        Sócio-operador
+      </button>
+    </div>
+  </div>
+
+  <!-- ---------- PAINEL: MORADOR ---------- -->
+  <div class="panel" id="p-morador" hidden>
+    <div class="mono panel-tag">Papel 01 · Quem usa</div>
+    <h2>Morador — quem vai fazer as sessões</h2>
+
+    <div class="hyp">
+      <div class="mono">A hipótese que quero testar com você</div>
+      <p>Existe demanda real e recorrente por sessão supervisionada de eletroestimulação dentro do condomínio — e o que hoje impede a rotina de treino é fricção de acesso e agenda, não preço nem falta de interesse.</p>
+    </div>
+
+    <div class="block">
+      <h3>Como funcionaria pra você</h3>
+      <ul class="sq">
+        <li><strong>Sessão curta e agendada</strong>Cerca de 20 minutos, com horário marcado, dentro do próprio prédio ou muito perto.</li>
+        <li><strong>Sempre com profissional</strong>Você não usa o aparelho sozinho. A sessão é acompanhada por profissional habilitado.</li>
+        <li><strong>Sem equipamento em casa</strong>Nada é instalado no seu apartamento e você não compra nada.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>O que ainda não está definido</h3>
+      <ul class="sq">
+        <li>Preço e formato de cobrança — assinatura, pacote ou sessão avulsa</li>
+        <li>Quantas sessões por semana fazem sentido</li>
+        <li>Quais horários a operação vai cobrir em cada local</li>
+      </ul>
+    </div>
+
+    <div class="form" data-role="Morador / usuário final">
+      <div class="mono">O que eu preciso de você</div>
+      <h3>Oito perguntas. Responda só o que fizer sentido.</h3>
+      <p class="intro">Não precisa saber nada de eletroestimulação pra responder. O que interessa é como é a sua rotina de verdade.</p>
+
+      <div class="q"><label for="m0">Seu nome</label><input id="m0" type="text" placeholder="Como você assina"></div>
+      <div class="q"><label for="m1"><b>01</b>Você treina hoje? Onde, e quantas vezes por semana de verdade?</label><textarea id="m1" placeholder="Vale responder tentei e parei"></textarea></div>
+      <div class="q"><label for="m2"><b>02</b>O que mais te atrapalha a manter uma rotina de treino?</label><textarea id="m2" placeholder="Deslocamento, horário, motivação, custo, cansaço..."></textarea></div>
+      <div class="q"><label for="m3"><b>03</b>Se houvesse sessão supervisionada de uns 20 minutos dentro do seu prédio, em que dias e horários você iria?</label><textarea id="m3"></textarea></div>
+      <div class="q"><label for="m4"><b>04</b>Você já conhecia ou já experimentou eletroestimulação? O que achou, ou o que te deixa em dúvida?</label><textarea id="m4"></textarea></div>
+      <div class="q"><label for="m5"><b>05</b>O que você esperaria sentir ou ver pra considerar que valeu a pena?</label><textarea id="m5"></textarea></div>
+      <div class="q"><label for="m6"><b>06</b>Faria mais sentido pra você pagar mensalidade ou pagar por sessão? Por quê?</label><textarea id="m6"></textarea></div>
+      <div class="q"><label for="m7"><b>07</b>Ter isso dentro do condomínio te incomodaria em algum ponto?</label><textarea id="m7" placeholder="Privacidade, uso da área comum, gente de fora, barulho"></textarea></div>
+      <div class="q"><label for="m8"><b>08</b>O que te faria dizer não?</label><textarea id="m8" placeholder="A pergunta mais útil da página"></textarea></div>
+
+      <div class="actions">
+        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
+        <button class="btn" data-act="save">Salvar formulário</button>
+      </div>
+      <div class="saved" data-saved></div>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+    </div>
+  </div>
+
+  <!-- ---------- PAINEL: CONDOMÍNIO ---------- -->
+  <div class="panel" id="p-condominio" hidden>
+    <div class="mono panel-tag">Papel 02 · Canal e capacidade</div>
+    <h2>Condomínio</h2>
+
+    <div class="hyp">
+      <div class="mono">A hipótese que quero testar com você</div>
+      <p>Condomínio de médio e alto padrão quer amenity premium, mas não quer operar nada nem investir. Dá pra entregar um serviço de saúde e performance dentro do prédio com investimento zero do condomínio e fricção operacional mínima para a administração.</p>
+    </div>
+
+    <div class="block">
+      <h3>Como imaginamos a divisão</h3>
+      <div class="split" style="margin-top:0">
+        <div class="col fixed">
+          <div class="mono">O condomínio entraria com</div>
+          <ul class="sq">
+            <li>Um espaço subutilizado — sala de ginástica ociosa, salão, espaço multiuso</li>
+            <li>Autorização de uso da área comum</li>
+            <li>Canal de comunicação com os moradores</li>
+          </ul>
+        </div>
+        <div class="col open">
+          <div class="mono">A Nodoo entraria com</div>
+          <ul class="sq">
+            <li>Equipamento e profissional habilitado</li>
+            <li>Agendamento, cobrança e relação direta com o morador</li>
+            <li>Operação inteira, incluindo montagem e retirada</li>
+            <li>Documentação, seguro e responsabilidade técnica <em>(escopo em definição)</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>O que o condomínio não faz</h3>
+      <ul class="sq notlist">
+        <li>Não compra nem financia equipamento</li>
+        <li>Não contrata nem gerencia profissional</li>
+        <li>Não administra agenda nem cobra morador</li>
+        <li>Não assume operação, manutenção ou reposição do ativo</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>O que ainda não está definido nesse papel</h3>
+      <ul class="sq">
+        <li>Se o condomínio recebe algo pela cessão do espaço ou se o ganho é o amenity em si</li>
+        <li>Enquadramento do uso de área comum e o que a convenção exige</li>
+        <li>Escopo de seguro e de responsabilidade em caso de incidente</li>
+        <li>Se o serviço fica restrito a moradores ou se abre pra vizinhança em horários definidos</li>
+      </ul>
+    </div>
+
+    <div class="form" data-role="Condomínio">
+      <div class="mono">O que eu preciso de você</div>
+      <h3>Sete perguntas.</h3>
+      <p class="intro">Se você é síndico, conselheiro, administradora ou morador com trânsito no conselho, sua leitura serve igual.</p>
+
+      <div class="q"><label for="d0">Seu nome e seu papel no condomínio</label><input id="d0" type="text" placeholder="Ex.: síndico, conselho, administradora, morador"></div>
+      <div class="q"><label for="d1"><b>01</b>Como funciona a decisão aí? Síndico resolve, passa pelo conselho, ou precisa de assembleia?</label><textarea id="d1"></textarea></div>
+      <div class="q"><label for="d2"><b>02</b>Que espaço existiria hoje pra isso, e quão ocioso ele realmente é?</label><textarea id="d2"></textarea></div>
+      <div class="q"><label for="d3"><b>03</b>Qual seria a primeira objeção do conselho?</label><textarea id="d3" placeholder="A que você já ouviu antes, não a teórica"></textarea></div>
+      <div class="q"><label for="d4"><b>04</b>Já teve serviço de terceiro operando dentro do condomínio? Como foi?</label><textarea id="d4" placeholder="Personal, aula, estética, pet, o que for"></textarea></div>
+      <div class="q"><label for="d5"><b>05</b>O que pesa mais: seguro e responsabilidade, uso de área comum, barulho, ou circulação de gente de fora?</label><textarea id="d5"></textarea></div>
+      <div class="q"><label for="d6"><b>06</b>Você acha que os moradores pagariam por sessão, ou isso só passa se vier embutido em alguma coisa?</label><textarea id="d6"></textarea></div>
+      <div class="q"><label for="d7"><b>07</b>O que faria isso ser aprovado sem custo nenhum pro condomínio?</label><textarea id="d7"></textarea></div>
+
+      <div class="actions">
+        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
+        <button class="btn" data-act="save">Salvar formulário</button>
+      </div>
+      <div class="saved" data-saved></div>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+    </div>
+  </div>
+
+  <!-- ---------- PAINEL: CLÍNICA ---------- -->
+  <div class="panel" id="p-clinica" hidden>
+    <div class="mono panel-tag">Papel 03 · Local parceiro</div>
+    <h2>Clínica, studio ou academia parceira</h2>
+
+    <div class="hyp">
+      <div class="mono">A hipótese que quero testar com você</div>
+      <p>Sua estrutura tem horário ocioso que hoje não gera receita nenhuma. Esse horário pode virar capacidade da rede e, ao mesmo tempo, um serviço novo pra sua própria base de clientes — sem você comprar equipamento e sem mudar o que você já faz.</p>
+    </div>
+
+    <div class="block">
+      <h3>Como imaginamos a divisão</h3>
+      <div class="split" style="margin-top:0">
+        <div class="col fixed">
+          <div class="mono">Você entraria com</div>
+          <ul class="sq">
+            <li>Espaço físico nos horários que hoje ficam vagos</li>
+            <li>Conhecimento do público local e do que funciona na cidade</li>
+            <li>Opcionalmente: sua própria base de clientes e pacientes usando o equipamento</li>
+          </ul>
+        </div>
+        <div class="col open">
+          <div class="mono">A Nodoo entraria com</div>
+          <ul class="sq">
+            <li>O equipamento — comprado e mantido por nós</li>
+            <li>O profissional habilitado, ou a habilitação de quem já está aí</li>
+            <li>Playbook de operação, agenda e captação de usuários</li>
+            <li>Marca e material comercial</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>O que isso não é</h3>
+      <ul class="sq notlist">
+        <li><strong>Não é franquia</strong>Você não compra nada, não paga taxa de entrada e não assume investimento.</li>
+        <li><strong>Não é aluguel de sala com contrato longo</strong>O desenho é de capacidade sob demanda, em horário combinado.</li>
+        <li><strong>Não é a rede levando seu paciente</strong>O objetivo é o inverso: ocupar hora vazia e dar ao seu cliente um serviço que ele buscaria fora.</li>
+        <li><strong>Não é obrigatoriamente você operando</strong>Você pode ser treinado para operar, ou um profissional da rede atende ali. As duas portas estão abertas.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>O que ainda não está definido nesse papel</h3>
+      <ul class="sq">
+        <li>Como remunerar a hora cedida: valor fixo, percentual por sessão, permuta de acesso ou outra coisa</li>
+        <li>Se você opera sendo treinado ou se um profissional da rede atende no seu espaço — e qual o modelo de receita em cada caso</li>
+        <li>Quem assina como responsável técnico em cada tipo de atendimento</li>
+        <li>Como ficam seguro, equipamento em trânsito e responsabilidade sobre o ativo</li>
+      </ul>
+    </div>
+
+    <div class="form" data-role="Clínica / studio / academia parceira">
+      <div class="mono">O que eu preciso de você</div>
+      <h3>Nove perguntas. Responda só o que fizer sentido.</h3>
+      <p class="intro">Escreva do jeito que você falaria. Respostas curtas servem. Discordar serve mais ainda — se a ideia não funciona, quero saber agora.</p>
+
+      <div class="q"><label for="c0">Seu nome</label><input id="c0" type="text" placeholder="Como você assina"></div>
+      <div class="q"><label for="c1"><b>01</b>Numa semana normal, quais faixas de horário sua estrutura fica ociosa?</label><textarea id="c1" placeholder="Dias e horários"></textarea></div>
+      <div class="q"><label for="c2"><b>02</b>O que precisaria ser verdade pra você abrir sua sala pra um profissional de fora atender ali?</label><textarea id="c2"></textarea></div>
+      <div class="q"><label for="c3"><b>03</b>Você preferiria ser treinado pra operar o equipamento, ou que um profissional da rede atendesse no seu espaço? Por quê?</label><textarea id="c3"></textarea></div>
+      <div class="q"><label for="c4"><b>04</b>Você usaria o equipamento com seus próprios pacientes e clientes? Em quais casos, e em quais nunca?</label><textarea id="c4"></textarea></div>
+      <div class="q"><label for="c5"><b>05</b>Onde isso conflita com o que você já vende hoje?</label><textarea id="c5" placeholder="Canibalização, concorrência com seu próprio serviço, imagem da clínica..."></textarea></div>
+      <div class="q"><label for="c6"><b>06</b>Responsabilidade técnica sobre quem atende no seu espaço: isso te preocupa? Como você resolveria?</label><textarea id="c6"></textarea></div>
+      <div class="q"><label for="c7"><b>07</b>Como você preferiria que a parte comercial funcionasse?</label><textarea id="c7" placeholder="Aluguel por hora, percentual por sessão, permuta, outra coisa"></textarea></div>
+      <div class="q"><label for="c8"><b>08</b>Fisioterapia e funcional são públicos bem diferentes. Em qual dos dois você enxerga mais encaixe pra isso — e por quê?</label><textarea id="c8"></textarea></div>
+      <div class="q"><label for="c9"><b>09</b>O que te faria dizer não na hora?</label><textarea id="c9" placeholder="A pergunta mais útil da página"></textarea></div>
+
+      <div class="actions">
+        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
+        <button class="btn" data-act="save">Salvar formulário</button>
+      </div>
+      <div class="saved" data-saved></div>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+    </div>
+  </div>
+
+  <!-- ---------- PAINEL: OPERADOR ---------- -->
+  <div class="panel" id="p-operador" hidden>
+    <div class="mono panel-tag">Papel 04 · Operação do cluster</div>
+    <h2>Sócio-operador local</h2>
+
+    <div class="hyp">
+      <div class="mono">A hipótese que quero testar com você</div>
+      <p>A peça mais crítica do piloto não é o equipamento — é quem faz a rede funcionar na rua. Existe um profissional que já atende, já domina o equipamento e já conhece a cidade, e que cresceria mais rápido operando uma rede do que atendendo sozinho.</p>
+    </div>
+
+    <div class="block">
+      <h3>O que um operador faria</h3>
+      <p style="font-size:14.5px;color:var(--steel);margin-bottom:16px">Leitura inicial, aberta a mudança — inclusive por você.</p>
+      <ul class="sq">
+        <li><strong>Atender as sessões</strong>E garantir a qualidade técnica do que a rede entrega.</li>
+        <li><strong>Cuidar do equipamento e da logística</strong>Deslocamento entre locais, conservação, agenda viável.</li>
+        <li><strong>Abrir e manter os locais parceiros</strong>Relação com condomínios, clínicas e academias da região.</li>
+        <li><strong>Alimentar os dados do piloto</strong>O que funcionou, o que quebrou, o que o cliente reclamou. Isso é metade do valor do piloto.</li>
+        <li><strong>Depois: formar e coordenar outros profissionais</strong>Quando o cluster crescer além do que uma pessoa atende.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>Como imaginamos a divisão</h3>
+      <div class="split" style="margin-top:0">
+        <div class="col fixed">
+          <div class="mono">Você entraria com</div>
+          <ul class="sq">
+            <li>Domínio técnico do equipamento e da sessão</li>
+            <li>Tempo e presença local</li>
+            <li>Sua reputação e sua base de alunos na cidade</li>
+            <li>Leitura de campo: o que o cliente daqui aceita e o que não aceita</li>
+          </ul>
+        </div>
+        <div class="col open">
+          <div class="mono">A Nodoo entraria com</div>
+          <ul class="sq">
+            <li>O equipamento e o CAPEX — o risco de capital é nosso</li>
+            <li>O desenho do modelo, o playbook e os indicadores</li>
+            <li>Marca, material comercial e captação de locais e condomínios</li>
+            <li>A estrutura pra replicar o cluster depois que ele funcionar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Sobre remuneração e sociedade — sem rodeio</h3>
+      <div class="notice" style="margin-top:0">
+        <div class="mono">Nada disso está definido</div>
+        <p>Não existe proposta fechada de remuneração, participação ou sociedade, e eu não vou inventar uma pra te convencer. O que existe é uma <strong>intenção declarada</strong>: quem operar o primeiro cluster deve ter uma posição diferente de quem entra depois, porque o risco e o trabalho de provar a tese são diferentes.</p>
+        <p>O formato — prestação de serviço, divisão de receita, participação com vesting por metas, ou uma combinação — é uma das coisas que eu quero desenhar <strong>com você</strong>, não te apresentar pronta. As perguntas abaixo são o começo dessa conversa.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>O que isso não é</h3>
+      <ul class="sq notlist">
+        <li><strong>Não é vaga de emprego</strong>Não estou oferecendo carteira, salário nem exclusividade neste momento.</li>
+        <li><strong>Não é pra você largar o que faz hoje</strong>O piloto tem que caber ao lado da sua rotina atual, não no lugar dela.</li>
+        <li><strong>Não é investimento seu</strong>O capital do equipamento é da Nodoo. Você não coloca dinheiro.</li>
+        <li><strong>Não é uma coisa pronta esperando assinatura</strong>É um desenho pela metade, e a segunda metade é conversa.</li>
+      </ul>
+    </div>
+
+    <div class="form" data-role="Sócio-operador local">
+      <div class="mono">O que eu preciso de você</div>
+      <h3>Nove perguntas. As últimas são as que mais importam.</h3>
+      <p class="intro">Responda com sinceridade bruta. Se a resposta for "isso não fecha pra mim porque X", esse X é exatamente o que eu preciso saber antes de comprar equipamento.</p>
+
+      <div class="q"><label for="o0">Seu nome</label><input id="o0" type="text" placeholder="Como você assina"></div>
+      <div class="q"><label for="o1"><b>01</b>Como é sua semana hoje, e o que te limita a crescer?</label><textarea id="o1" placeholder="Horas disponíveis, teto de alunos, equipamento, espaço, captação..."></textarea></div>
+      <div class="q"><label for="o2"><b>02</b>Se você tivesse acesso ao equipamento sem precisar comprá-lo, o que mudaria na prática?</label><textarea id="o2"></textarea></div>
+      <div class="q"><label for="o3"><b>03</b>Quantas sessões por semana você consegue atender sem perder qualidade?</label><textarea id="o3" placeholder="E em quais horários você realmente tem disponibilidade"></textarea></div>
+      <div class="q"><label for="o4"><b>04</b>Atender em mais de um local no mesmo dia: o que isso complica de verdade?</label><textarea id="o4" placeholder="Deslocamento, montagem do equipamento, intervalo entre sessões, cansaço"></textarea></div>
+      <div class="q"><label for="o5"><b>05</b>Na sua leitura, o que um operador de cluster teria que fazer além de atender? Falta ou sobra alguma coisa na lista acima?</label><textarea id="o5"></textarea></div>
+      <div class="q"><label for="o6"><b>06</b>Você tem interesse na parte de operar e crescer a rede, ou seu interesse é só atender?</label><textarea id="o6" placeholder="As duas respostas são válidas — mudam o desenho, não a conversa"></textarea></div>
+      <div class="q"><label for="o7"><b>07</b>Que tipo de relação faria sentido pra você?</label><textarea id="o7" placeholder="Prestação de serviço por sessão, divisão de receita, participação por metas, mix..."></textarea></div>
+      <div class="q"><label for="o8"><b>08</b>O que você precisaria ver funcionando pra topar entrar de cabeça?</label><textarea id="o8"></textarea></div>
+      <div class="q"><label for="o9"><b>09</b>O que te faria dizer não?</label><textarea id="o9" placeholder="Sem filtro, por favor"></textarea></div>
+
+      <div class="actions">
+        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
+        <button class="btn" data-act="save">Salvar formulário</button>
+      </div>
+      <div class="saved" data-saved></div>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+    </div>
+  </div>
+
+  <!-- ============ ASSINATURA ============ -->
+  <div class="sign">
+    <div class="mono">Por que você recebeu isso</div>
+    <p>Te mandei essa página porque eu não quero te vender nada agora. Quero a tua leitura antes de eu decidir qualquer coisa — antes de comprar equipamento, antes de fechar local, antes de escrever qualquer contrato.</p>
+    <p>Você conhece o terreno melhor que eu. Se a tua resposta for <strong>"isso não funciona porque X"</strong>, ela vale mais pra mim do que um sim educado.</p>
+    <div class="name">Cleverton Ribeiro</div>
+    <div class="role">Nodoo · Discovery do primeiro cluster — Oeste de SC</div>
+  </div>
+
+  <footer>
+    <div class="mono">
+      Nodoo — documento de discovery · conteúdo em validação<br>
+      Nada nesta página constitui proposta, oferta ou compromisso comercial.<br>
+      As afirmações sobre o modelo são hipóteses de trabalho, não fatos validados.
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO — número de retorno das respostas.
+   Formato internacional, só dígitos.
+   Se ficar vazio, o botão de WhatsApp some e sobra o de copiar.
+   ============================================================ */
+var WHATSAPP = "5554981644576";
+
+/* ============================================================
+   FORM_ENDPOINT — para onde "Salvar formulário" envia as respostas.
+   Vazio: a página não fala com servidor nenhum e o botão salva um
+   arquivo no dispositivo de quem respondeu.
+   Preenchido com a URL de um Google Apps Script Web App: as respostas
+   caem direto numa planilha no Google Drive.
+   ATENÇÃO: isso só funciona com a página hospedada FORA do claude.ai.
+   O sandbox do Artifact bloqueia requisições de rede para hosts que
+   não estão na allowlist, em silêncio. Ver scripts/salvar-respostas.gs
+   ============================================================ */
+var FORM_ENDPOINT = "";
+
+(function(){
+  var VIEWS = ['morador','condominio','clinica','operador'];
+
+  /* ---- grupo de abas genérico ---- */
+  function initGroup(group, prefix, opts){
+    opts = opts || {};
+    var list = document.querySelector('.pubtabs[data-group="' + group + '"]');
+    if(!list) return null;
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('.ptab'));
+
+    function show(view, scroll){
+      if(VIEWS.indexOf(view) === -1) view = VIEWS[0];
+      tabs.forEach(function(t){
+        t.setAttribute('aria-selected', String(t.getAttribute('data-view') === view));
+      });
+      VIEWS.forEach(function(v){
+        var el = document.getElementById(prefix + v);
+        if(el) el.hidden = (v !== view);
+      });
+      if(opts.hash && history.replaceState) history.replaceState(null, '', '#' + view);
+      if(scroll && opts.scrollTo){
+        var anchor = document.querySelector(opts.scrollTo);
+        if(anchor){
+          var y = anchor.getBoundingClientRect().top + window.pageYOffset - 60;
+          window.scrollTo({top:y, behavior:'smooth'});
+        }
+      }
+    }
+
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){ show(t.getAttribute('data-view'), true); });
+    });
+
+    return show;
+  }
+
+  var showValor = initGroup('valor', 'v-', {});
+  var showForm  = initGroup('form', 'p-', {hash:true, scrollTo:'#voce'});
+
+  /* ---- persistência local por campo ---- */
+  var fields = Array.prototype.slice.call(document.querySelectorAll('.form textarea, .form input'));
+  fields.forEach(function(f){
+    var key = 'nodoo_v2_' + f.id;
+    try{ var v = localStorage.getItem(key); if(v) f.value = v; }catch(e){}
+    f.addEventListener('input', function(){
+      try{ localStorage.setItem(key, f.value); }catch(e){}
+      var form = f.closest('.form');
+      var box = form && form.querySelector('[data-saved]');
+      if(box){ box.textContent = 'Rascunho salvo neste navegador'; }
+    });
+  });
+
+  /* ---- monta o texto das respostas ---- */
+  function build(form){
+    var out = [];
+    out.push('NODOO — RESPOSTAS DE VALIDAÇÃO');
+    out.push('Papel: ' + form.getAttribute('data-role'));
+    out.push('');
+    Array.prototype.slice.call(form.querySelectorAll('.q')).forEach(function(q){
+      var field = q.querySelector('textarea, input');
+      if(!field || !field.value.trim()) return;
+      var lbl = q.querySelector('label');
+      var n   = lbl.querySelector('b');
+      var label;
+      if(n){
+        var num = n.textContent.trim();
+        label = num + '. ' + lbl.textContent.replace(num,'').replace(/\s+/g,' ').trim();
+      } else {
+        label = lbl.textContent.replace(/\s+/g,' ').trim();
+      }
+      out.push(label);
+      out.push('> ' + field.value.trim());
+      out.push('');
+    });
+    if(out.length <= 3) return null;
+    return out.join('\n');
+  }
+
+  function slug(s){
+    return String(s).toLowerCase()
+      .replace(/[áàâã]/g,'a').replace(/[éê]/g,'e').replace(/í/g,'i')
+      .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
+  }
+
+  /* área de transferência — último recurso */
+  function copiar(txt, msg){
+    function ok(){ msg.textContent = 'Copiado — agora é só colar e me mandar'; }
+    function manual(){ msg.textContent = 'Não consegui salvar — copie o texto e me mande'; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(ok, manual);
+      return;
+    }
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); } catch(e){ manual(); }
+    document.body.removeChild(ta);
+  }
+
+  /* 1) endpoint · 2) arquivo no dispositivo · 3) área de transferência */
+  function salvar(form, msg, txt){
+    var papel = form.getAttribute('data-role');
+    msg.textContent = 'Salvando…';
+
+    function nomeArquivo(){
+      return 'nodoo-' + slug(papel) + '-' + new Date().toISOString().slice(0,10) + '.txt';
+    }
+
+    /* download direto — funciona em host normal (GitHub Pages e afins).
+       Dentro do sandbox do Artifact é inerte, por isso só entra quando a
+       capability do Artifact não está disponível. */
+    function baixar(){
+      try{
+        if(!(window.Blob && window.URL && URL.createObjectURL)) return false;
+        var blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+        var url  = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = nomeArquivo(); a.style.display = 'none';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+        msg.textContent = 'Arquivo baixado — me manda por WhatsApp ou e-mail';
+        return true;
+      }catch(e){ return false; }
+    }
+
+    function arquivo(){
+      if(!(window.claude && typeof window.claude.use === 'function')){
+        if(!baixar()) copiar(txt, msg);
+        return;
+      }
+      window.claude.use('downloads').then(function(dl){
+        if(!dl){ if(!baixar()) copiar(txt, msg); return; }
+        dl.save({filename:nomeArquivo(), data:txt}).then(function(){
+          msg.textContent = 'Arquivo salvo — me manda por WhatsApp ou e-mail';
+        }, function(err){
+          if(err && err.code === 'declined'){ msg.textContent = 'Salvamento cancelado'; return; }
+          if(!baixar()) copiar(txt, msg);
+        });
+      }, function(){ if(!baixar()) copiar(txt, msg); });
+    }
+
+    if(!FORM_ENDPOINT){ arquivo(); return; }
+
+    var ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 12000) : null;
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({papel:papel, respostas:txt, enviadoEm:new Date().toISOString()}),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function(r){
+      if(timer) clearTimeout(timer);
+      if(r && r.ok){ msg.textContent = 'Formulário salvo — obrigado'; }
+      else { arquivo(); }
+    }).catch(function(){
+      if(timer) clearTimeout(timer);
+      arquivo();
+    });
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('.form')).forEach(function(form){
+    var msg = form.querySelector('[data-saved]');
+
+    if(!WHATSAPP){
+      var wab = form.querySelector('[data-act="wa"]');
+      if(wab && wab.parentNode) wab.parentNode.removeChild(wab);
+      var sv = form.querySelector('[data-act="save"]');
+      if(sv) sv.className = 'btn primary';
+    }
+
+    Array.prototype.slice.call(form.querySelectorAll('[data-act]')).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var txt = build(form);
+        if(!txt){ msg.textContent = 'Responda pelo menos uma pergunta primeiro'; return; }
+
+        if(btn.getAttribute('data-act') === 'wa'){
+          window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(txt), '_blank');
+          msg.textContent = 'Abrindo o WhatsApp…';
+          return;
+        }
+
+        salvar(form, msg, txt);
+      });
+    });
+  });
+
+  /* ---- estado inicial ---- */
+  if(showValor) showValor(VIEWS[0], false);
+  if(showForm)  showForm((location.hash || '').replace('#',''), false);
+})();
+</script>
+</body>
+</html>
