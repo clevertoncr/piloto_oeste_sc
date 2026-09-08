@@ -271,6 +271,21 @@ ul.sq li strong{display:block;color:var(--white);font-weight:600;margin-bottom:2
 .sign .name{margin-top:26px;font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:17px;color:var(--white)}
 .sign .role{font-size:13.5px;color:var(--steel);margin-top:2px}
 
+/* ---------- contato ---------- */
+.contato{margin-top:30px;padding-top:28px;border-top:1px solid var(--line-soft)}
+.contato > .mono{color:var(--steel);margin-bottom:16px}
+.wa{
+  display:inline-flex;align-items:center;gap:11px;
+  background:linear-gradient(90deg,var(--purple),var(--lavender));
+  color:var(--white);text-decoration:none;
+  font-family:'Inter',Arial,sans-serif;font-weight:600;font-size:15px;
+  padding:15px 26px;border-radius:6px;transition:filter .15s
+}
+.wa:hover{filter:brightness(1.1)}
+.wa:focus-visible{outline:2px solid var(--lavender);outline-offset:3px}
+.wa svg{flex:0 0 auto;width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.contato p{margin-top:16px;font-size:13.5px;color:var(--steel);max-width:52ch}
+
 footer{border-top:1px solid var(--line-soft);margin-top:56px;padding:30px 0 60px}
 footer .mono{color:#4c5159;line-height:1.9}
 
@@ -1030,6 +1045,15 @@ footer .mono{color:#4c5159;line-height:1.9}
     <p>Você conhece o terreno melhor que eu. Se a tua resposta for <strong>"isso não funciona porque X"</strong>, ela vale mais pra mim do que um sim educado.</p>
     <div class="name">Cleverton Ribeiro</div>
     <div class="role">Nodoo · Discovery do primeiro cluster — Oeste de SC</div>
+
+    <div class="contato">
+      <div class="mono">Prefere conversar?</div>
+      <a class="wa" href="https://wa.me/5554981644576?text=Oi%20Cleverton%2C%20vi%20a%20p%C3%A1gina%20do%20piloto%20da%20Nodoo%20e%20queria%20conversar." target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L3.5 20.5l1.5-4.7A8.4 8.4 0 1 1 20.5 11.6Z"/><path d="M8.9 8.6c-.3.7-.2 1.6.4 2.6a8 8 0 0 0 3.5 3.5c1 .6 1.9.7 2.6.4l.6-1.5-2-.9-.9.8a6.2 6.2 0 0 1-2.6-2.6l.8-.9-.9-2Z"/></svg>
+        Falar comigo no WhatsApp
+      </a>
+      <p>Se for mais fácil responder por conversa do que por formulário, me chama. As perguntas continuam valendo do mesmo jeito.</p>
+    </div>
   </div>
 
   <footer>
