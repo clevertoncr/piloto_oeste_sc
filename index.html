@@ -775,11 +775,10 @@ footer .mono{color:#4c5159;line-height:1.9}
       <div class="q"><label for="m8"><b>08</b>O que te faria dizer não?</label><textarea id="m8" placeholder="A pergunta mais útil da página"></textarea></div>
 
       <div class="actions">
-        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
-        <button class="btn" data-act="save">Salvar formulário</button>
+        <button class="btn primary" data-act="save">Salvar formulário</button>
       </div>
       <div class="saved" data-saved></div>
-      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador enquanto responde — dá pra fechar e voltar depois. Nada sai daqui até você clicar em <strong>Salvar formulário</strong>.</p>
     </div>
   </div>
 
@@ -851,11 +850,10 @@ footer .mono{color:#4c5159;line-height:1.9}
       <div class="q"><label for="d7"><b>07</b>O que faria isso ser aprovado sem custo nenhum pro condomínio?</label><textarea id="d7"></textarea></div>
 
       <div class="actions">
-        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
-        <button class="btn" data-act="save">Salvar formulário</button>
+        <button class="btn primary" data-act="save">Salvar formulário</button>
       </div>
       <div class="saved" data-saved></div>
-      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador enquanto responde — dá pra fechar e voltar depois. Nada sai daqui até você clicar em <strong>Salvar formulário</strong>.</p>
     </div>
   </div>
 
@@ -929,11 +927,10 @@ footer .mono{color:#4c5159;line-height:1.9}
       <div class="q"><label for="c9"><b>09</b>O que te faria dizer não na hora?</label><textarea id="c9" placeholder="A pergunta mais útil da página"></textarea></div>
 
       <div class="actions">
-        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
-        <button class="btn" data-act="save">Salvar formulário</button>
+        <button class="btn primary" data-act="save">Salvar formulário</button>
       </div>
       <div class="saved" data-saved></div>
-      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador enquanto responde — dá pra fechar e voltar depois. Nada sai daqui até você clicar em <strong>Salvar formulário</strong>.</p>
     </div>
   </div>
 
@@ -1019,11 +1016,10 @@ footer .mono{color:#4c5159;line-height:1.9}
       <div class="q"><label for="o9"><b>09</b>O que te faria dizer não?</label><textarea id="o9" placeholder="Sem filtro, por favor"></textarea></div>
 
       <div class="actions">
-        <button class="btn primary" data-act="wa">Enviar no WhatsApp</button>
-        <button class="btn" data-act="save">Salvar formulário</button>
+        <button class="btn primary" data-act="save">Salvar formulário</button>
       </div>
       <div class="saved" data-saved></div>
-      <p class="hint">O que você digita fica salvo no seu próprio navegador — dá pra fechar e voltar depois. Nada é enviado automaticamente.</p>
+      <p class="hint">O que você digita fica salvo no seu próprio navegador enquanto responde — dá pra fechar e voltar depois. Nada sai daqui até você clicar em <strong>Salvar formulário</strong>.</p>
     </div>
   </div>
 
@@ -1047,13 +1043,6 @@ footer .mono{color:#4c5159;line-height:1.9}
 </div>
 
 <script>
-/* ============================================================
-   CONFIGURAÇÃO — número de retorno das respostas.
-   Formato internacional, só dígitos.
-   Se ficar vazio, o botão de WhatsApp some e sobra o de copiar.
-   ============================================================ */
-var WHATSAPP = "5554981644576";
-
 /* ============================================================
    FORM_ENDPOINT — para onde "Salvar formulário" envia as respostas.
    Vazio: a página não fala com servidor nenhum e o botão salva um
@@ -1153,7 +1142,7 @@ var FORM_ENDPOINT = "";
 
   /* área de transferência — último recurso */
   function copiar(txt, msg){
-    function ok(){ msg.textContent = 'Copiado — agora é só colar e me mandar'; }
+    function ok(){ msg.textContent = 'Copiado — agora é só colar e me enviar'; }
     function manual(){ msg.textContent = 'Não consegui salvar — copie o texto e me mande'; }
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(ok, manual);
@@ -1187,7 +1176,7 @@ var FORM_ENDPOINT = "";
         a.href = url; a.download = nomeArquivo(); a.style.display = 'none';
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
         setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-        msg.textContent = 'Arquivo baixado — me manda por WhatsApp ou e-mail';
+        msg.textContent = 'Arquivo baixado — me envie por onde preferir';
         return true;
       }catch(e){ return false; }
     }
@@ -1200,7 +1189,7 @@ var FORM_ENDPOINT = "";
       window.claude.use('downloads').then(function(dl){
         if(!dl){ if(!baixar()) copiar(txt, msg); return; }
         dl.save({filename:nomeArquivo(), data:txt}).then(function(){
-          msg.textContent = 'Arquivo salvo — me manda por WhatsApp ou e-mail';
+          msg.textContent = 'Arquivo salvo no seu dispositivo — me envie por onde preferir';
         }, function(err){
           if(err && err.code === 'declined'){ msg.textContent = 'Salvamento cancelado'; return; }
           if(!baixar()) copiar(txt, msg);
@@ -1232,24 +1221,10 @@ var FORM_ENDPOINT = "";
   Array.prototype.slice.call(document.querySelectorAll('.form')).forEach(function(form){
     var msg = form.querySelector('[data-saved]');
 
-    if(!WHATSAPP){
-      var wab = form.querySelector('[data-act="wa"]');
-      if(wab && wab.parentNode) wab.parentNode.removeChild(wab);
-      var sv = form.querySelector('[data-act="save"]');
-      if(sv) sv.className = 'btn primary';
-    }
-
-    Array.prototype.slice.call(form.querySelectorAll('[data-act]')).forEach(function(btn){
+    Array.prototype.slice.call(form.querySelectorAll('[data-act="save"]')).forEach(function(btn){
       btn.addEventListener('click', function(){
         var txt = build(form);
         if(!txt){ msg.textContent = 'Responda pelo menos uma pergunta primeiro'; return; }
-
-        if(btn.getAttribute('data-act') === 'wa'){
-          window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(txt), '_blank');
-          msg.textContent = 'Abrindo o WhatsApp…';
-          return;
-        }
-
         salvar(form, msg, txt);
       });
     });
